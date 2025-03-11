@@ -23,26 +23,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Mostra el fitxer
-      - run: cat fitxer.txt
-
-      - name: ssh scp ssh pipelines
+      # Runs a single command using the runners shell
+      - name: Connectar-se via SSH i executar ordres
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-        env:
-         WELCOME: "ssh scp ssh pipelines"
-         LASTSSH: "Doing something after copying"
         with:
-         host: ${{ secrets.DB_HOST }}
-         user: ${{ secrets.DB_USER }}
-         pass: ${{ secrets.DB_PASS }}
-         port: 22
-         connect_timeout: 10s
-         first_ssh: | 
-          ls -la  
-          echo $WELCOME
-         scp: |
-          './app.tgz' => /home/totmaquinacendrassos/githubaction/web
-         last_ssh: |
-          echo $LASTSSH
+          host: ${{ secrets.DB_HOST }}
+          user: ${{ secrets.DB_USER }}
+          pass: ${{ secrets.DB_PASS }}
+          port: 22
+          first_ssh: |
+            echo "Ens hem connectat correctament al servidor!"
+      - name: Mostra el fitxer 
+        run: cat fitxer.txt
