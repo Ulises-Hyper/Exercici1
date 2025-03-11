@@ -34,9 +34,9 @@ jobs:
          WELCOME: "ssh scp ssh pipelines"
          LASTSSH: "Doing something after copying"
         with:
-         host: ${{ secrets.SSH_HOST }}
-         user: ${{ secrets.SSH_USER }}
-         pass: ${{ secrets.SSH_PASS }}
+         host: ${{ secrets.DB_HOST }}
+         user: ${{ secrets.DB_USER }}
+         pass: ${{ secrets.DB_PASS }}
          port: 22
          connect_timeout: 10s
          first_ssh: | 
